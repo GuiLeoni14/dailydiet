@@ -15,7 +15,7 @@ export class FetchAvailablePetsPerCityUseCase {
   async execute({
     city,
   }: FetchAvailablePetsPerCityUseCaseRequest): Promise<FetchAvailablePetsPerCityUseCaseResponse> {
-    const pets = await this.petsRepository.findAvailablePetsByCity({
+    const pets = await this.petsRepository.findAvailableByCity({
       city,
     })
 

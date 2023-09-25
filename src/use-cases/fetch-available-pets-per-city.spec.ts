@@ -1,7 +1,7 @@
 import { PetsRepository } from '@/repositories/pets-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/in-memory-pets-repository'
 import { describe, it, expect, beforeEach } from 'vitest'
-import { FetchAvailablePetsPerCityUseCase } from './fetch-avaliable-pets-per-city'
+import { FetchAvailablePetsPerCityUseCase } from './fetch-available-pets-per-city'
 
 let petsRepository: PetsRepository
 let sut: FetchAvailablePetsPerCityUseCase
