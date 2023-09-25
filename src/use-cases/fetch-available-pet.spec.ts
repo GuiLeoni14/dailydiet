@@ -26,4 +26,19 @@ describe('Pet use case', () => {
 
     expect(pet).toBeDefined()
   })
+
+  it('not should be able to search not available pet', async () => {
+    const { id: petId } = await petsRepository.create({
+      name: 'diana',
+      characteristics: 'olhos azuis, pelo marrom e branco',
+      city: 'machado',
+      isAvailableAdoption: false,
+    })
+
+    const { pet } = await sut.execute({
+      petId,
+    })
+
+    expect(pet).toEqual(null)
+  })
 })

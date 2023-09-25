@@ -29,6 +29,9 @@ model Org {
   address        String
   Adoption       Adoption[]
 
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String @unique
+
   @@map("orgs")
 }
 
@@ -42,4 +45,15 @@ model Adoption {
   org_id String
 
   @@map("adoptions")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  created_at    DateTime @default(now())
+  Org           Org?
+
+  @@map("users")
 }
