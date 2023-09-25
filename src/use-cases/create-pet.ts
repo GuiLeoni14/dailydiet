@@ -1,18 +1,18 @@
 import { Pet } from '@prisma/client'
 import { PetsRepository } from '@/repositories/pets-repository'
 
-interface CreatePetsUseCaseProps {
+interface CreatePetUseCaseProps {
   name: string
   characteristics: string
   city: string
   isAvailableAdoption: boolean
 }
 
-interface CreatePetsUseCaseResponse {
+interface CreatePetUseCaseResponse {
   pet: Pet
 }
 
-export class CreatePetsUseCase {
+export class CreatePetUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({
@@ -20,7 +20,7 @@ export class CreatePetsUseCase {
     characteristics,
     city,
     isAvailableAdoption,
-  }: CreatePetsUseCaseProps): Promise<CreatePetsUseCaseResponse> {
+  }: CreatePetUseCaseProps): Promise<CreatePetUseCaseResponse> {
     const pet = await this.petsRepository.create({
       name,
       characteristics,
