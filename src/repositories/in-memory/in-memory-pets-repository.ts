@@ -1,5 +1,8 @@
 import { Pet, Prisma } from '@prisma/client'
-import { PetsRepository } from '../pets-repository'
+import {
+  FindAvailablePetsByCityParams,
+  PetsRepository,
+} from '../pets-repository'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -17,5 +20,13 @@ export class InMemoryPetsRepository implements PetsRepository {
     this.items.push(pet)
 
     return pet
+  }
+
+  async findAvailablePetsByCity({ city }: FindAvailablePetsByCityParams) {
+    const pets = this.items.filter(
+      (pet) => pet.city.includes(city) && pet.isAvailableAdoption,
+    )
+
+    return pets
   }
 }
