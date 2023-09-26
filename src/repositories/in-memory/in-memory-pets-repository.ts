@@ -32,11 +32,13 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pets
   }
 
-  async findByCharacteristics({
+  async findByCharacteristicsAndCity({
     characteristics,
+    city,
   }: FindByCharacteristicsParams) {
-    const pets = this.items.filter((pet) =>
-      pet.characteristics.includes(characteristics),
+    const pets = this.items.filter(
+      (pet) =>
+        pet.characteristics.includes(characteristics) && pet.city === city,
     )
 
     return pets

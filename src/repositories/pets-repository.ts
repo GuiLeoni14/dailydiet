@@ -6,6 +6,7 @@ export interface FindAvailableByCityParams {
 
 export interface FindByCharacteristicsParams {
   characteristics: string
+  city: string
 }
 
 export interface FindByAdoptionParams {
@@ -15,6 +16,8 @@ export interface FindByAdoptionParams {
 export interface PetsRepository {
   create(data: Prisma.PetCreateInput): Promise<Pet>
   findAvailableByCity(params: FindAvailableByCityParams): Promise<Pet[]>
-  findByCharacteristics(params: FindByCharacteristicsParams): Promise<Pet[]>
+  findByCharacteristicsAndCity(
+    params: FindByCharacteristicsParams,
+  ): Promise<Pet[]>
   findAvailableById(params: FindByAdoptionParams): Promise<Pet | null>
 }

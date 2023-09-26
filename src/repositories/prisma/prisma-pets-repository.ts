@@ -38,9 +38,10 @@ export class PrismaPetsRepository implements PetsRepository {
     return pet
   }
 
-  async findByCharacteristics(params: FindByCharacteristicsParams) {
+  async findByCharacteristicsAndCity(params: FindByCharacteristicsParams) {
     const pets = await prisma.pet.findMany({
       where: {
+        city: params.city,
         characteristics: {
           contains: params.characteristics,
         },

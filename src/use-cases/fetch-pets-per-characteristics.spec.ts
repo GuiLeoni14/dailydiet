@@ -29,6 +29,7 @@ describe('Fetch Pets Per Characteristics Use case', () => {
 
     const { pets } = await sut.execute({
       characteristics: 'olhos castanhos',
+      city: 'machado',
     })
 
     expect(pets).toHaveLength(1)
