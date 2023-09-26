@@ -5,14 +5,12 @@ import { z } from 'zod'
 import { makeFetchAvailablePetsPerCityUseCase } from '@/use-cases/factories/make-fetch-available-pets-per-city'
 
 export async function search(req: FastifyRequest, res: FastifyReply) {
-  const searchPetsPerCityQuerySchema = z.object({
+  const searchPetsQuerySchema = z.object({
     city: z.string(),
     characteristics: z.string().optional(),
   })
 
-  const { city, characteristics } = searchPetsPerCityQuerySchema.parse(
-    req.query,
-  )
+  const { city, characteristics } = searchPetsQuerySchema.parse(req.query)
   let petsResponse: Pet[] = []
 
   const fetchPetsPerCharacteristicsUseCase =

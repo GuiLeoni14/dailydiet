@@ -11,7 +11,7 @@ x Deve ser possível realizar login como uma ORG
 
 x Para listar os pets, obrigatoriamente precisamos informar a cidade
 x Uma ORG precisa ter um endereço e um número de WhatsApp
-- Um pet deve estar ligado a uma ORG
+x Um pet deve estar ligado a uma ORG
 - O usuário que quer adotar, entrará em contato com a ORG via WhatsApp -> criar caso de uso de adoção
-- Todos os filtros, além da cidade, são opcionais
+x Todos os filtros, além da cidade, são opcionais
 - Para uma ORG acessar a aplicação como admin, ela precisa estar logada
