@@ -4,13 +4,21 @@ import { FastifyInstance } from 'fastify'
 import request from 'supertest'
 
 export async function createAndAuthenticateUser(app: FastifyInstance) {
-  await prisma.user.create({
-    data: {
-      name: 'John Doe',
+  const userAlreadyExists = await prisma.user.findFirst({
+    where: {
       email: 'johndoe@example.com',
-      password_hash: await hash('123456', 6),
+      name: 'John Doe',
     },
   })
+  if (!userAlreadyExists) {
+    await prisma.user.create({
+      data: {
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password_hash: await hash('123456', 6),
+      },
+    })
+  }
 
   const authResponse = await request(app.server).post('/sessions').send({
     email: 'johndoe@example.com',
