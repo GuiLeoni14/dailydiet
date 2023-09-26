@@ -45,6 +45,7 @@ export class PrismaPetsRepository implements PetsRepository {
         characteristics: {
           contains: params.characteristics,
         },
+        isAvailableAdoption: true,
       },
     })
 

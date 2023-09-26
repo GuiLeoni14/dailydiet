@@ -5,9 +5,8 @@ import { list } from './list'
 import { search } from './search'
 
 export async function petsRoutes(app: FastifyInstance) {
-  app.addHook('onRequest', verifyJwt)
-
-  app.post('/pets', create)
   app.get('/pets/search', search)
   app.get('/pets', list)
+
+  app.post('/pets', { onRequest: verifyJwt }, create)
 }

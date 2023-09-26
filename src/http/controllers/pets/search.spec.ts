@@ -1,7 +1,6 @@
 import request from 'supertest'
 import { app } from '@/app'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 import { prisma } from '@/lib/prisma'
 
 describe('Search Pet (e2e)', () => {
@@ -14,8 +13,6 @@ describe('Search Pet (e2e)', () => {
   })
 
   it('should be able to search pets without characteristics', async () => {
-    const { token } = await createAndAuthenticateUser(app)
-
     const user = await prisma.user.create({
       data: {
         email: 'teste',
@@ -43,20 +40,15 @@ describe('Search Pet (e2e)', () => {
       },
     })
 
-    const response = await request(app.server)
-      .get('/pets/search')
-      .set('Authorization', `Bearer ${token}`)
-      .query({
-        city: 'teste',
-      })
+    const response = await request(app.server).get('/pets/search').query({
+      city: 'teste',
+    })
 
     expect(response.statusCode).toEqual(200)
     expect(response.body.pets).toHaveLength(1)
   })
 
   it('should be able to search pets with characteristics and city', async () => {
-    const { token } = await createAndAuthenticateUser(app)
-
     const user = await prisma.user.create({
       data: {
         email: 'teste-02',
@@ -84,21 +76,16 @@ describe('Search Pet (e2e)', () => {
       },
     })
 
-    const response = await request(app.server)
-      .get('/pets/search')
-      .set('Authorization', `Bearer ${token}`)
-      .query({
-        city: 'teste',
-        characteristics: 'teste',
-      })
+    const response = await request(app.server).get('/pets/search').query({
+      city: 'teste',
+      characteristics: 'teste',
+    })
 
     expect(response.statusCode).toEqual(200)
     expect(response.body.pets).toHaveLength(1)
   })
 
   it('should be able not to search pets without city', async () => {
-    const { token } = await createAndAuthenticateUser(app)
-
     const user = await prisma.user.create({
       data: {
         email: 'teste-03',
@@ -126,12 +113,9 @@ describe('Search Pet (e2e)', () => {
       },
     })
 
-    const response = await request(app.server)
-      .get('/pets/search')
-      .set('Authorization', `Bearer ${token}`)
-      .query({
-        characteristics: 'teste',
-      })
+    const response = await request(app.server).get('/pets/search').query({
+      characteristics: 'teste',
+    })
     expect(response.statusCode).toEqual(400)
   })
 })
