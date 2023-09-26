@@ -14,7 +14,7 @@ export interface FindByAdoptionParams {
 }
 
 export interface PetsRepository {
-  create(data: Prisma.PetCreateInput): Promise<Pet>
+  create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   findAvailableByCity(params: FindAvailableByCityParams): Promise<Pet[]>
   findByCharacteristicsAndCity(
     params: FindByCharacteristicsParams,

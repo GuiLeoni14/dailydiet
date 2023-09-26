@@ -17,7 +17,10 @@ model Pet {
   city            String
 
   isAvailableAdoption Boolean
-  Adoption            Adoption[]
+
+  Adoption Adoption[]
+  org      Org        @relation(fields: [org_id], references: [id])
+  org_id   String     @unique
 
   @@map("pets")
 }
@@ -31,6 +34,7 @@ model Org {
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String @unique
+  Pet     Pet[]
 
   @@map("orgs")
 }

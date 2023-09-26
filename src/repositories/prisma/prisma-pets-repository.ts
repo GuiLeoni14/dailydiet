@@ -8,7 +8,7 @@ import {
 import { prisma } from '@/lib/prisma'
 
 export class PrismaPetsRepository implements PetsRepository {
-  async create(data: Prisma.PetCreateInput) {
+  async create(data: Prisma.PetUncheckedCreateInput) {
     const pet = await prisma.pet.create({
       data,
     })

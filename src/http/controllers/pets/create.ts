@@ -4,18 +4,20 @@ import { z } from 'zod'
 
 export async function create(req: FastifyRequest, res: FastifyReply) {
   const createPetBodySchema = z.object({
+    orgId: z.string(),
     name: z.string(),
     characteristics: z.string(),
     city: z.string(),
     isAvailableAdoption: z.boolean(),
   })
 
-  const { name, characteristics, city, isAvailableAdoption } =
+  const { orgId, name, characteristics, city, isAvailableAdoption } =
     createPetBodySchema.parse(req.body)
 
   const createPetUseCase = makeCreatePetUseCase()
 
   await createPetUseCase.execute({
+    orgId,
     name,
     characteristics,
     city,

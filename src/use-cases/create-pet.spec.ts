@@ -18,6 +18,7 @@ describe('Pet use case', () => {
       characteristics: 'olhos azuis, pelo marrom e branco',
       city: 'machado',
       isAvailableAdoption: true,
+      orgId: 'teste',
     })
 
     expect(pet.id).toEqual(expect.any(String))

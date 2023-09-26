@@ -16,12 +16,24 @@ describe('List Pet (e2e)', () => {
   it('should be able to list pets per city', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
+    const user = await prisma.user.findFirstOrThrow()
+
+    const org = await prisma.org.create({
+      data: {
+        name: 'teste',
+        address: 'teste',
+        whatsappNumber: 'teste',
+        user_id: user.id,
+      },
+    })
+
     await prisma.pet.create({
       data: {
         name: 'teste',
         characteristics: 'teste',
         city: 'teste',
         isAvailableAdoption: true,
+        org_id: org.id,
       },
     })
 

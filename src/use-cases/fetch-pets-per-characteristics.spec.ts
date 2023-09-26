@@ -18,6 +18,7 @@ describe('Fetch Pets Per Characteristics Use case', () => {
       characteristics: 'olhos azuis, pelo marrom e branco',
       city: 'machado',
       isAvailableAdoption: true,
+      org_id: 'teste',
     })
 
     await petsRepository.create({
@@ -25,6 +26,7 @@ describe('Fetch Pets Per Characteristics Use case', () => {
       characteristics: 'olhos castanhos, pelo marrom e preto',
       city: 'machado',
       isAvailableAdoption: false,
+      org_id: 'teste',
     })
 
     const { pets } = await sut.execute({
