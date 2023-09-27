@@ -2,6 +2,7 @@ import { OrgsRepository } from '@/repositories/orgs-repository'
 import { UsersRepository } from '@/repositories/users-respository'
 import { Org } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { OrgAlreadyCreatedByUserError } from './errors/org-already-created-by-user-error '
 
 interface CreateOrgUseCaseRequest {
   userId: string
@@ -30,6 +31,14 @@ export class CreateOrgUseCase {
 
     if (!user) {
       throw new ResourceNotFoundError()
+    }
+
+    const orgAlreadyCreatedByUser = await this.orgsRepository.findByUserId(
+      user.id,
+    )
+
+    if (orgAlreadyCreatedByUser) {
+      throw new OrgAlreadyCreatedByUserError()
     }
 
     const org = await this.orgsRepository.create({

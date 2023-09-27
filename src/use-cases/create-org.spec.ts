@@ -5,6 +5,7 @@ import { CreateOrgUseCase } from './create-org'
 import { UsersRepository } from '@/repositories/users-respository'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { OrgAlreadyCreatedByUserError } from './errors/org-already-created-by-user-error '
 
 let orgsRepository: OrgsRepository
 let usersRepository: UsersRepository
@@ -44,5 +45,29 @@ describe('Pet use case', () => {
         userId: '123',
       }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
+  })
+
+  it('should be able to not create an organization with an undefined user', async () => {
+    const user = await usersRepository.create({
+      name: 'Guilherme',
+      email: 'teste@gmail.com',
+      password_hash: '123',
+    })
+
+    await sut.execute({
+      name: 'Org 1',
+      whatsappNumber: '(35) 9989786332',
+      address: 'cidade-mg',
+      userId: user.id,
+    })
+
+    await expect(() =>
+      sut.execute({
+        name: 'Org 2',
+        whatsappNumber: '(35) 9989786332',
+        address: 'cidade-mg',
+        userId: user.id,
+      }),
+    ).rejects.toBeInstanceOf(OrgAlreadyCreatedByUserError)
   })
 })

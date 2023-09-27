@@ -1,4 +1,4 @@
-import { PrismaOrgRepository } from '@/repositories/prisma/prisma-org-repository'
+import { PrismaOrgRepository } from '@/repositories/prisma/prisma-orgs-repository'
 import { CreateOrgUseCase } from '../create-org'
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
 

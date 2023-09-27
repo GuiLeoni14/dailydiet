@@ -14,6 +14,16 @@ export class InMemoryOrgsRepository implements OrgsRepository {
       user_id: data.user_id,
     } satisfies Org
 
+    this.items.push(org)
+
     return org
+  }
+
+  async findById(id: string) {
+    return this.items.find((item) => item.id === id) ?? null
+  }
+
+  async findByUserId(userId: string) {
+    return this.items.find((item) => item.user_id === userId) ?? null
   }
 }
