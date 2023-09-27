@@ -1,7 +1,6 @@
 import { Prisma } from '@prisma/client'
 import {
   FindByAdoptionParams,
-  FindByCharacteristicsParams,
   PetsRepository,
   SearchManyParams,
 } from '../pets-repository'
@@ -25,20 +24,6 @@ export class PrismaPetsRepository implements PetsRepository {
     })
 
     return pet
-  }
-
-  async findByCharacteristicsAndCity(params: FindByCharacteristicsParams) {
-    const pets = await prisma.pet.findMany({
-      where: {
-        city: params.city,
-        characteristics: {
-          contains: params.characteristics,
-        },
-        isAvailableAdoption: true,
-      },
-    })
-
-    return pets
   }
 
   async searchMany({ city, query, page }: SearchManyParams) {
