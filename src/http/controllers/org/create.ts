@@ -1,3 +1,4 @@
+import { OrgAlreadyCreatedByUserError } from '@/use-cases/errors/org-already-created-by-user-error '
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { makeCreateOrgUseCase } from '@/use-cases/factories/make-create-org-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -26,6 +27,11 @@ export async function create(req: FastifyRequest, res: FastifyReply) {
     })
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
+      return res.status(409).send({
+        error: error.message,
+      })
+    }
+    if (error instanceof OrgAlreadyCreatedByUserError) {
       return res.status(409).send({
         error: error.message,
       })
