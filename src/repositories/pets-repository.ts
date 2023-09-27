@@ -13,9 +13,15 @@ export interface FindByAdoptionParams {
   petId: string
 }
 
+export interface SearchManyParams {
+  query?: string
+  city: string
+  page: number
+}
 export interface PetsRepository {
   create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
   findAvailableByCity(params: FindAvailableByCityParams): Promise<Pet[]>
+  searchMany(params: SearchManyParams): Promise<Pet[]>
   findByCharacteristicsAndCity(
     params: FindByCharacteristicsParams,
   ): Promise<Pet[]>

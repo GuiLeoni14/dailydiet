@@ -42,6 +42,7 @@ describe('Search Pet (e2e)', () => {
 
     const response = await request(app.server).get('/pets/search').query({
       city: 'teste',
+      page: 1,
     })
 
     expect(response.statusCode).toEqual(200)
@@ -77,8 +78,9 @@ describe('Search Pet (e2e)', () => {
     })
 
     const response = await request(app.server).get('/pets/search').query({
-      city: 'teste',
-      characteristics: 'teste',
+      city: 'teste-02',
+      query: 'teste',
+      page: 1,
     })
 
     expect(response.statusCode).toEqual(200)
@@ -114,7 +116,8 @@ describe('Search Pet (e2e)', () => {
     })
 
     const response = await request(app.server).get('/pets/search').query({
-      characteristics: 'teste',
+      query: 'teste',
+      page: 1,
     })
     expect(response.statusCode).toEqual(400)
   })

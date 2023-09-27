@@ -12,7 +12,7 @@ describe('Fetch Pets Per Characteristics Use case', () => {
     sut = new FetchPetsPerCharacteristics(petsRepository)
   })
 
-  it('should be able to search available pets per city', async () => {
+  it('should be able to search available pets per characteristics', async () => {
     await petsRepository.create({
       name: 'diana',
       characteristics: 'olhos azuis, pelo marrom e branco',

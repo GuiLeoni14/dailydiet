@@ -18,6 +18,7 @@ describe('Pet use case', () => {
       characteristics: 'olhos azuis, pelo marrom e branco',
       city: 'machado',
       isAvailableAdoption: true,
+      org_id: 'teste',
     })
 
     const { pet } = await sut.execute({
@@ -33,6 +34,7 @@ describe('Pet use case', () => {
       characteristics: 'olhos azuis, pelo marrom e branco',
       city: 'machado',
       isAvailableAdoption: false,
+      org_id: 'teste',
     })
 
     const { pet } = await sut.execute({

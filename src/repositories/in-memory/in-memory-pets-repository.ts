@@ -4,6 +4,7 @@ import {
   FindByAdoptionParams,
   FindByCharacteristicsParams,
   PetsRepository,
+  SearchManyParams,
 } from '../pets-repository'
 import { randomUUID } from 'node:crypto'
 
@@ -51,5 +52,23 @@ export class InMemoryPetsRepository implements PetsRepository {
     )
 
     return pet ?? null
+  }
+
+  async searchMany({ city, query, page }: SearchManyParams) {
+    const pets = this.items
+      .filter((item) => {
+        if (query) {
+          return (
+            item.characteristics.includes(query) ||
+            (item.name.includes(query) &&
+              item.city === city &&
+              item.isAvailableAdoption)
+          )
+        }
+        return item.city === city && item.isAvailableAdoption
+      })
+      .slice((page - 1) * 20, page * 20)
+
+    return pets
   }
 }
