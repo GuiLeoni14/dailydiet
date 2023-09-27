@@ -31,6 +31,7 @@ describe('Fetch Available Pets Per City UseCase', () => {
 
     const { pets } = await sut.execute({
       city: 'machado',
+      page: 1,
     })
 
     expect(pets).toHaveLength(1)

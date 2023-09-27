@@ -1,6 +1,5 @@
 import { Prisma } from '@prisma/client'
 import {
-  FindAvailableByCityParams,
   FindByAdoptionParams,
   FindByCharacteristicsParams,
   PetsRepository,
@@ -15,17 +14,6 @@ export class PrismaPetsRepository implements PetsRepository {
     })
 
     return pet
-  }
-
-  async findAvailableByCity(params: FindAvailableByCityParams) {
-    const pets = await prisma.pet.findMany({
-      where: {
-        city: params.city,
-        isAvailableAdoption: true,
-      },
-    })
-
-    return pets
   }
 
   async findAvailableById(params: FindByAdoptionParams) {

@@ -1,6 +1,5 @@
 import { Pet, Prisma } from '@prisma/client'
 import {
-  FindAvailableByCityParams,
   FindByAdoptionParams,
   FindByCharacteristicsParams,
   PetsRepository,
@@ -24,14 +23,6 @@ export class InMemoryPetsRepository implements PetsRepository {
     this.items.push(pet)
 
     return pet
-  }
-
-  async findAvailableByCity({ city }: FindAvailableByCityParams) {
-    const pets = this.items.filter(
-      (pet) => pet.city.includes(city) && pet.isAvailableAdoption,
-    )
-
-    return pets
   }
 
   async findByCharacteristicsAndCity({

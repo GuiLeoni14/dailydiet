@@ -42,6 +42,7 @@ describe('List Pet (e2e)', () => {
 
     const response = await request(app.server).get('/pets').query({
       city: 'teste',
+      page: 1,
     })
 
     expect(response.statusCode).toEqual(200)
