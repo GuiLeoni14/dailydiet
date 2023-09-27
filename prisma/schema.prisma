@@ -20,7 +20,7 @@ model Pet {
 
   Adoption Adoption[]
   org      Org        @relation(fields: [org_id], references: [id])
-  org_id   String     @unique
+  org_id   String
 
   @@map("pets")
 }
